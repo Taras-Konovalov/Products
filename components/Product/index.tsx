@@ -1,22 +1,27 @@
 import React, { FC } from "react";
 import { Button } from "../common/Button";
 import styles from "./Product.module.css";
+import { Products } from "@/utils/products";
+import moment from "moment";
+import { useDispatch } from "react-redux";
+import { addItemToBasket } from "@/store";
 
 type Props = {
-  title: string;
-  type: string;
-  fromDate: string;
-  toDate: string;
-  price: Array<{ value: number; symbol: string; isDefault: number }>;
+  product: Products;
 };
 
-export const Product: FC<Props> = ({
-  title,
-  type,
-  fromDate,
-  toDate,
-  price,
-}) => {
+export const Product: FC<Props> = ({ product }) => {
+  const { title, type, price, guarantee } = product;
+
+  const fromDate = moment(guarantee.start, "YYYY-MM-DD HH:mm:ss").format(
+    "MM/DD/YY"
+  );
+  const toDate = moment(guarantee.end, "YYYY-MM-DD HH:mm:ss").format(
+    "MM/DD/YY"
+  );
+
+  const dispatch = useDispatch();
+
   return (
     <div className={styles.productsItem}>
       <span className={styles.name}>{title}</span>
@@ -34,7 +39,9 @@ export const Product: FC<Props> = ({
           <span key={index}>{`${value} ${symbol}`}</span>
         ))}
       </div>
-      <Button>Add to Basket</Button>
+      <Button onClick={() => dispatch(addItemToBasket(product))}>
+        Add to Basket
+      </Button>
     </div>
   );
 };
