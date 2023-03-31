@@ -32,6 +32,12 @@
   margin-bottom: 10px;
 }
 
+.quantity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .guarantee > * {
   width: 100%;
   white-space: nowrap;
@@ -45,6 +51,11 @@
   align-items: center;
 }
 
+.modalInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 @media (max-width: 810px) {
   .productsItem > * {

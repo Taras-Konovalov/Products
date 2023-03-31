@@ -37,7 +37,7 @@ const Products: FC = () => {
     <PageLayout title="Products" content="">
       <section className={styles.products}>
         <div className={styles.selectType}>
-          <span>Type :</span>
+          <span>Type:</span>
           <Select
             options={options}
             value={selectedOption}

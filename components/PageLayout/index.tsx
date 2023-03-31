@@ -31,7 +31,7 @@ export const PageLayout: FC<Props> = ({ title, content, children }) => {
       <div className={clsx(roboto.className, styles.wrapper)}>
         <TopMenu />
         <main className={styles.main}>
-          <NavigationMenu routes={appRoutes}/>
+          <NavigationMenu routes={appRoutes} />
           <div className={styles.content}>{children}</div>
         </main>
       </div>

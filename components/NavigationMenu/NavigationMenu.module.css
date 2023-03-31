@@ -25,6 +25,10 @@
   color: black
 }
 
+.link:hover {
+  color: inherit;
+}
+
 .activLink::before {
   content: "";
   position: absolute;

@@ -3,7 +3,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { Products } from "@/utils/products";
 
-interface QuantityProducts extends Products {
+export interface QuantityProducts extends Products {
   quantity: number;
 }
 
@@ -33,6 +33,9 @@ export const productsSlice = createSlice({
         state.basket.push(newProduct);
       }
     },
+    removeItemFromBasket: (state, action) => {
+      state.basket = state.basket.filter((item) => item.id !== action.payload);
+    },
   },
 });
 
@@ -43,7 +46,6 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, productsSlice.reducer);
 
-export const { addItemToBasket } = productsSlice.actions;
-
+export const { addItemToBasket, removeItemFromBasket } = productsSlice.actions;
 
 export default persistedReducer;
