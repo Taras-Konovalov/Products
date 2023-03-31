@@ -5,6 +5,7 @@ import { Products } from "@/utils/products";
 
 export interface QuantityProducts extends Products {
   quantity: number;
+  dateOfСreation: string;
 }
 
 interface Basket {
@@ -29,6 +30,7 @@ export const productsSlice = createSlice({
         const newProduct = {
           ...action.payload,
           quantity: 1,
+          dateOfСreation: new Date(),
         };
         state.basket.push(newProduct);
       }

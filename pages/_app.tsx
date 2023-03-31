@@ -4,15 +4,8 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { configureStore } from "@reduxjs/toolkit";
 import persistedReducer from "@/store";
-import {
-  persistStore,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
+import { persistStore } from "redux-persist";
+import { motion } from "framer-motion";
 
 const store = configureStore({
   reducer: {
@@ -22,11 +15,26 @@ const store = configureStore({
 
 const persistor = persistStore(store);
 
-export default function App({ Component, pageProps }: AppProps) {
+const animations = {
+  initial: { opacity: 0, x: -50 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: 0 },
+};
+
+export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Component {...pageProps} />
+        <motion.div
+          key={router.route}
+          variants={animations}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={{ duration: 1 }}
+        >
+          <Component {...pageProps} />
+        </motion.div>
       </PersistGate>
     </Provider>
   );

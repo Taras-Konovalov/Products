@@ -19,7 +19,7 @@
 }
 
 .name {
-  text-align: left;
+  text-align: center;
 }
 
 .guarantee {
@@ -38,8 +38,40 @@
   align-items: center;
 }
 
+.totalPrice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.currency {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.currency > * {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .guarantee > * {
   width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dateOfСreation {
+  display: flex;
+  flex-direction: column;
+}
+
+.dateOfСreation > * {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -48,13 +80,6 @@
 .price {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.modalInfo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 @media (max-width: 810px) {

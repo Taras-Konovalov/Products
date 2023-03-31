@@ -5,7 +5,6 @@ import { Product } from "@/components/Product";
 import { QuantityProducts } from "@/store";
 import styles from "../../styles/pages/orders.module.css";
 
-
 const Orders: FC = () => {
   const products = useSelector((state: any) => state.products.basket);
 

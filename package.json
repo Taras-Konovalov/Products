@@ -19,6 +19,7 @@
     "clsx": "^1.2.1",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
+    "framer-motion": "^6.2.8",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "next": "13.2.4",

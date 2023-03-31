@@ -9,8 +9,7 @@ import {
   QuantityProducts,
   removeItemFromBasket,
 } from "@/store";
-import { Modal } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { ModalOverlay } from "../ModalOverlay";
 
 type Props = {
   product: Products | QuantityProducts;
@@ -23,6 +22,12 @@ export const Product: FC<Props> = ({ product, isBasket = false }) => {
   const [show, setShow] = useState(false);
 
   let quantity: number | undefined;
+
+  let dateOfСreation: string | undefined;
+
+  if ("dateOfСreation" in product) {
+    dateOfСreation = product.dateOfСreation;
+  }
 
   if ("quantity" in product) {
     quantity = product.quantity;
@@ -52,48 +57,47 @@ export const Product: FC<Props> = ({ product, isBasket = false }) => {
           <span>{quantity}</span>
         </div>
       )}
-      <div className={styles.guarantee}>
-        <span>
-          from <strong>{fromDate}</strong>
-        </span>
-        <span>
-          to <strong>{toDate}</strong>
-        </span>
-      </div>
+      {isBasket && (
+        <div className={styles.dateOfСreation}>
+          <span>{moment(dateOfСreation).format("MM/DD")}</span>
+          <span>{moment(dateOfСreation).format("DD/MMM/YYYY")}</span>
+        </div>
+      )}
+      {!isBasket && (
+        <div className={styles.guarantee}>
+          <span>
+            from <strong>{fromDate}</strong>
+          </span>
+          <span>
+            to <strong>{toDate}</strong>
+          </span>
+        </div>
+      )}
       <div className={styles.price}>
         {price.map(({ value, symbol }, index) => (
           <span key={index}>{`${value} ${symbol}`}</span>
         ))}
       </div>
+      {isBasket && (
+        <div className={styles.totalPrice}>
+          <span>Total: </span>
+          <div className={styles.currency}>
+            <span>{`${price[0].value * (quantity || 1)} USD`}</span>
+            <span>{`${price[1].value * (quantity || 1)} UAH`}</span>
+          </div>
+        </div>
+      )}
       <Button onClick={handleEvent}>
         {!isBasket ? "Add to Basket" : "Delete"}
       </Button>
       {isBasket && (
-        <Modal
+        <ModalOverlay
           show={show}
-          centered
           onHide={() => setShow(!show)}
-          size="lg"
-          backdrop="static"
-        >
-          <Modal.Header closeButton></Modal.Header>
-          <Modal.Body>
-            <h4>Are you sure you want to delete these items?</h4>
-            <div className={styles.modalInfo}>
-              <span>{title}</span>
-              <div className={styles.quantity}>
-                <span>Quantity: </span>
-                <span>{quantity}</span>
-              </div>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={() => setShow(!show)}>Cancel</Button>
-            <Button onClick={() => dispatch(removeItemFromBasket(id))}>
-              Delete
-            </Button>
-          </Modal.Footer>
-        </Modal>
+          onDelete={() => dispatch(removeItemFromBasket(id))}
+          title={title}
+          quantity={quantity}
+        />
       )}
     </div>
   );
