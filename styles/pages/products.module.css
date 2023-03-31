@@ -1,0 +1,19 @@
+.products {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+}
+
+.productsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px
+}
+
+.selectType {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+

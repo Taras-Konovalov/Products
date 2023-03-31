@@ -1,0 +1,16 @@
+.button {
+  padding: 10px 20px;
+  color: #ffffff;
+  background: green;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.button:hover {
+  border: 2px solid green;
+  background: #ffffff;
+  color: green;
+}
