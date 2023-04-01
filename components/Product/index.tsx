@@ -10,13 +10,21 @@ import {
   removeItemFromBasket,
 } from "@/store";
 import { ModalOverlay } from "../ModalOverlay";
+import Image from "next/image";
 
 type Props = {
   product: Products | QuantityProducts;
   isBasket?: boolean;
+  onShowDetails?: () => void;
+  onHideDetails?: () => void;
 };
 
-export const Product: FC<Props> = ({ product, isBasket = false }) => {
+export const Product: FC<Props> = ({
+  product,
+  isBasket = false,
+  onShowDetails,
+  onHideDetails,
+}) => {
   const { id, title, type, price, guarantee } = product;
 
   const [show, setShow] = useState(false);
@@ -45,6 +53,13 @@ export const Product: FC<Props> = ({ product, isBasket = false }) => {
   const handleEvent = !isBasket
     ? () => dispatch(addItemToBasket(product))
     : () => setShow(!show);
+
+  const deleteProduct = () => {
+    dispatch(removeItemFromBasket(id));
+    if (onHideDetails) {
+      onHideDetails();
+    }
+  };
 
   return (
     <div className={styles.productsItem}>
@@ -91,10 +106,15 @@ export const Product: FC<Props> = ({ product, isBasket = false }) => {
         {!isBasket ? "Add to Basket" : "Delete"}
       </Button>
       {isBasket && (
+        <button className={styles.details} onClick={onShowDetails}>
+          <Image src="/icons/arrow.svg" alt="arrow" width={20} height={20} />
+        </button>
+      )}
+      {isBasket && (
         <ModalOverlay
           show={show}
           onHide={() => setShow(!show)}
-          onDelete={() => dispatch(removeItemFromBasket(id))}
+          onDelete={deleteProduct}
           title={title}
           quantity={quantity}
         />
