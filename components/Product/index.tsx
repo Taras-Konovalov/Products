@@ -93,7 +93,7 @@ export const Product: FC<Props> = ({
           onHide={() => setShow(!show)}
           onDelete={deleteProduct}
           title={title}
-          quantity={quantity}
+          quantity={quantity ?? 1}
         />
       )}
     </div>

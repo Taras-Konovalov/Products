@@ -9,7 +9,7 @@ type Props = {
   onHide: () => void;
   onDelete: MouseEventHandler<HTMLButtonElement>;
   title: string;
-  quantity: number | undefined;
+  quantity: number;
 };
 
 export const ModalOverlay: FC<Props> = ({

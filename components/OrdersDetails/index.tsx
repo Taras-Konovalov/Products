@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import styles from "./OrdersDetails.module.css";
 import { CloseButton } from "react-bootstrap";
-import { QuantityProducts } from "@/store";
+import { Products } from "@/utils/products";
 
 type Props = {
-  orders: QuantityProducts[];
+  orders: Products[];
   onClose: () => void;
 };
 

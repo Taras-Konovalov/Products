@@ -2,7 +2,7 @@ import React, { FC, useMemo, useState } from "react";
 import { PageLayout } from "@/components/PageLayout";
 import { useSelector } from "react-redux";
 import { Product } from "@/components/Product";
-import { QuantityProducts } from "@/store";
+import { Products } from "@/utils/products";
 import styles from "../../styles/pages/orders.module.css";
 import { OrdersDetails } from "@/components/OrdersDetails";
 
@@ -23,7 +23,7 @@ const Orders: FC = () => {
 
   const findProduct = useMemo(() => {
     return products.find(
-      (product: QuantityProducts) => product.id === productId
+      (product: Products) => product.id === productId
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
@@ -41,7 +41,7 @@ const Orders: FC = () => {
         {products.length ? (
           <>
             <div className={styles.orders}>
-              {products.map((product: QuantityProducts) => (
+              {products.map((product: Products) => (
                 <Product
                   key={product.id}
                   product={product}
