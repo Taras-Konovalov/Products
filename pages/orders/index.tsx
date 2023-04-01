@@ -25,7 +25,7 @@ const Orders: FC = () => {
     return products.find(
       (product: QuantityProducts) => product.id === productId
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
   const allProductsInOrder = Array.from(
@@ -38,22 +38,28 @@ const Orders: FC = () => {
   return (
     <PageLayout title="Orders" content="">
       <div className={styles.ordersWrapper}>
-        <div className={styles.orders}>
-          {products.map((product: QuantityProducts) => (
-            <Product
-              key={product.id}
-              product={product}
-              onShowDetails={() => handleShowDetails(product.id)}
-              onHideDetails={handleHideDetails}
-              isBasket
-            />
-          ))}
-        </div>
-        {showDetails && (
-          <OrdersDetails
-            orders={allProductsInOrder}
-            onClose={() => setShowDetails(false)}
-          />
+        {products.length ? (
+          <>
+            <div className={styles.orders}>
+              {products.map((product: QuantityProducts) => (
+                <Product
+                  key={product.id}
+                  product={product}
+                  onShowDetails={() => handleShowDetails(product.id)}
+                  onHideDetails={handleHideDetails}
+                  isBasket
+                />
+              ))}
+            </div>
+            {showDetails && (
+              <OrdersDetails
+                orders={allProductsInOrder}
+                onClose={() => setShowDetails(false)}
+              />
+            )}
+          </>
+        ) : (
+          <h3>No orders</h3>
         )}
       </div>
     </PageLayout>
