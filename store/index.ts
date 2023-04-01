@@ -3,13 +3,8 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { Products } from "@/utils/products";
 
-export interface QuantityProducts extends Products {
-  quantity: number;
-  dateOfСreation: string;
-}
-
 interface Basket {
-  basket: QuantityProducts[];
+  basket: Products[];
 }
 
 const initialState: Basket = {
@@ -25,7 +20,7 @@ export const productsSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (existingProduct) {
-        existingProduct.quantity += 1;
+        existingProduct.quantity! += 1;
       } else {
         const newProduct = {
           ...action.payload,

@@ -4,16 +4,12 @@ import styles from "./Product.module.css";
 import { Products } from "@/utils/products";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import {
-  addItemToBasket,
-  QuantityProducts,
-  removeItemFromBasket,
-} from "@/store";
+import { addItemToBasket, removeItemFromBasket } from "@/store";
 import { ModalOverlay } from "../ModalOverlay";
 import Image from "next/image";
 
 type Props = {
-  product: Products | QuantityProducts;
+  product: Products;
   isBasket?: boolean;
   onShowDetails?: () => void;
   onHideDetails?: () => void;
@@ -25,30 +21,11 @@ export const Product: FC<Props> = ({
   onShowDetails,
   onHideDetails,
 }) => {
-  const { id, title, type, price, guarantee } = product;
-
-  const [show, setShow] = useState(false);
-
-  let quantity: number | undefined;
-
-  let dateOfСreation: string | undefined;
-
-  if ("dateOfСreation" in product) {
-    dateOfСreation = product.dateOfСreation;
-  }
-
-  if ("quantity" in product) {
-    quantity = product.quantity;
-  }
-
-  const fromDate = moment(guarantee.start, "YYYY-MM-DD HH:mm:ss").format(
-    "MM/DD/YY"
-  );
-  const toDate = moment(guarantee.end, "YYYY-MM-DD HH:mm:ss").format(
-    "MM/DD/YY"
-  );
+  const { id, title, type, price, guarantee, quantity, dateOfСreation } =
+    product;
 
   const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
 
   const handleEvent = !isBasket
     ? () => dispatch(addItemToBasket(product))
@@ -81,10 +58,10 @@ export const Product: FC<Props> = ({
       {!isBasket && (
         <div className={styles.guarantee}>
           <span>
-            from <strong>{fromDate}</strong>
+            from <strong>{moment(guarantee.start).format("MM/DD/YY")}</strong>
           </span>
           <span>
-            to <strong>{toDate}</strong>
+            to <strong>{moment(guarantee.end).format("MM/DD/YY")}</strong>
           </span>
         </div>
       )}

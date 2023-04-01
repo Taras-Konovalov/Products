@@ -1,15 +1,15 @@
-type Price = {
+interface Price {
   value: number;
   symbol: string;
   isDefault: number;
-};
+}
 
-type Guarantee = {
+interface Guarantee {
   start: string;
   end: string;
-};
+}
 
-export type Products = {
+export interface Products {
   id: number;
   serialNumber: number;
   isNew: number;
@@ -21,7 +21,9 @@ export type Products = {
   price: Price[];
   order: number;
   date: string;
-};
+  quantity?: number;
+  dateOfСreation?: string;
+}
 
 export const products: Products[] = [
   {
