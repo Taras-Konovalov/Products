@@ -5,12 +5,12 @@
 
 .main {
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - 100px);
 }
 
 .content {
   flex: 2;
   background: #F0F3F5;
-  padding: 30px 20px 0 20px;
+  padding: 30px 20px 20px;
 }
 
